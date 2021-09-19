@@ -12,6 +12,7 @@ const HeroCarousal = () => {
     centerPadding: "300px",
     slidesToShow: 1,
     infinite: true,
+    slidesToScroll: 1,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };

@@ -16,5 +16,8 @@
     //Razorpay payment gateway
 
 
-//Plan-> How are we building it???
-    
+//Plan-> How are we building it???  
+    //Layuts
+    //Routes
+    //Pages
+    //Components

@@ -3,7 +3,9 @@ import React from 'react'
 export const Movie = () => {
     return (
         <>
-            hii
+         <div>
+             <img  />
+         </div>
         </>
     );
 };

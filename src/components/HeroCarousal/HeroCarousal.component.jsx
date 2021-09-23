@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import HeroSlider from "react-slick";
+import axios from "axios";
 
 //import component
 import { NextArrow, PrevArrow } from "./Arrows.component";
 
 const HeroCarousal = () => {
+const [images, setImages] = useState([]);
+
+useEffect(() => {
+  const requestNowPlayingMovies = async () => {
+    const getImages = await axios.get("/movie/now_playing");
+    setImages(getImages.data.results);
+  };
+
+  requestNowPlayingMovies ();
+}, []);
+
+
   const settingsLG = {
     arrows: true,
     autoplay: true,
@@ -27,12 +40,6 @@ const HeroCarousal = () => {
     prevArrow: <PrevArrow />,
   };
 
-  const images = [
-    "https://images.unsplash.com/photo-1631931020352-da7c5165e715?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzNHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1631897287144-a36cfeb21096?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzN3x8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1631947248287-a3ea4cd4bfaa?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1MXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    "https://images.unsplash.com/photo-1631799161705-4e4261d05c40?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3OXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-  ];
   return (
     <>
       <div className="lg:hidden">
@@ -40,7 +47,7 @@ const HeroCarousal = () => {
           {images.map((image) => (
             <div className="w-full h-56 md:h-80 py-3">
               <img
-                src={image}
+                src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
                 alt="testing"
                 className="w-full h-full rounded-md"
               />
@@ -54,7 +61,7 @@ const HeroCarousal = () => {
           {images.map((image) => (
             <div className="w-full h-96 px-2 py-3">
               <img
-                src={image}
+                 src={`https://image.tmdb.org/t/p/original${image.backdrop_path}`}
                 alt="testing"
                 className="w-full h-full rounded-md"
               />

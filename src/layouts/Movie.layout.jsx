@@ -1,20 +1,33 @@
-import React from 'react'
-import MovieNavbar from '../components/Navbar/movieNavbar.component';
+import axios from "axios";
+import React, {useEffect, useContext} from "react";
+import {useParams} from "react-router-dom"
+
 
 //components
-import Navbar from "../components/Navbar/navbar.component";
+import MovieNavbar from "../components/Navbar/navbar.component";
 
-
+//context
+import {MovieContext} from "../context/movie.context";
 
 export const MovieLayout = (props) => {
-    return (
-        <>
-              <MovieNavbar />
-        
-            {props.children}
-        
-        </>
-    );
+  const { id } = useParams();
+  const {movie, setMovie} = useContext(MovieContext);
+
+  useEffect(() => {
+    const requestMovie = async () => {
+  const getMovieData = await axios.get(`/movie/${id}`);
+  setMovie(getMovieData.data);
+    };
+    requestMovie();
+  }, []);
+  
+  return (
+    <>
+      <MovieNavbar />
+
+      {props.children}
+    </>
+  );
 };
 
 export default MovieLayout;
